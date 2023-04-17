@@ -23,7 +23,7 @@ const config: DocsThemeConfig = {
             <meta property="og:title" content={frontMatter.title || 'Betwatch Guide'} />
             <meta property="og:description" content={frontMatter.description || 'Guides and tutorials for the Betwatch odds comparison platform'} />
             <meta property="og:image" content={frontMatter.image || '/og-image.png'} />
-            <meta name="twitter:card" content="summary" />
+            <meta name="twitter:card" content="summary_large_image" />
             <meta name="twitter:site" content="@BetwatchHQ" />
             <meta name="twitter:creator" content="@BetwatchHQ" />
             <link rel="shortcut icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
