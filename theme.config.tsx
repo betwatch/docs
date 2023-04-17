@@ -24,6 +24,7 @@ const config: DocsThemeConfig = {
             <meta property="og:description" content={frontMatter.description || 'Guides and tutorials for the Betwatch odds comparison platform'} />
             <meta property="og:image" content={frontMatter.image || 'https://guide.betwatch.com/og-image.png'} />
             <meta name="twitter:card" content="summary_large_image" />
+            <meta name="twitter:url" content={url} />
             <meta name="twitter:site" content="@BetwatchHQ" />
             <meta name="twitter:creator" content="@BetwatchHQ" />
             <meta name="twitter:title" content={frontMatter.title + ' - Betwatch Guide' || 'Betwatch Guide'} />
