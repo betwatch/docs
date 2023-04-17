@@ -27,10 +27,9 @@ const config: DocsThemeConfig = {
             <meta name="twitter:url" content={url} />
             <meta name="twitter:site" content="@BetwatchHQ" />
             <meta name="twitter:creator" content="@BetwatchHQ" />
-            <meta name="twitter:title" content={frontMatter.title + ' - Betwatch Guide' || 'Betwatch Guide'} />
-            <meta name="twitter:image" content={frontMatter.image || 'https://guide.betwatch.com/og-image.png'} />
             <link rel="shortcut icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
             <link rel="shortcut icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+            <meta name="robots" content="follow, index" />
         </>
     },
     project: {
