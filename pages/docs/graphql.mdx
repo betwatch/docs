@@ -14,7 +14,7 @@ If you would like access to the API, it requires a separate subscription fee. Pl
 
 ### Query a Single Race
 
-```graphql
+```graphql copy
 race(id: $id) {
     __typename
     id
@@ -95,7 +95,7 @@ race(id: $id) {
 
 ### Query Multiple Races
 
-```graphql
+```graphql copy
 races(dateFrom: $dateFrom, dateTo: $dateTo, andDates: $andDates) {
     id
     meeting {
