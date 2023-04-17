@@ -1,1 +1,148 @@
-# GraphQL
+# GraphQL API Documentation
+
+## Introduction to GraphQL
+
+GraphQL is a query language for your API, and a runtime for executing those queries against your data. Unlike REST, which exposes a fixed set of predefined endpoints, GraphQL allows you to request only the data you need by sending a single query. This makes it more flexible and efficient, especially when working with large or complex data sets.
+
+## Getting Started
+
+To make queries to the Betwatch.com GraphQL API, use the endpoint `api.betwatch.com/query`. There is also a [playground](https://api.betwatch.com/playground) endpoint you can use for exploring the API and testing your queries. Note that authentication is required; you must pass your API key as the `X-API-KEY` header in your requests.
+
+If you would like access to the API, it requires a separate subscription fee. Please email `[support@betwatch.com](mailto:support@betwatch.com)` to request access.
+
+## Example Queries
+
+### Query a Single Race
+
+```graphql
+race(id: $id) {
+    __typename
+    id
+    betfairMapping {
+        win
+        place
+    }
+    meeting {
+        __typename
+        id
+        track
+        location
+        type
+        date
+    }
+    name
+    number
+    status
+    startTime
+    distance
+    results
+    links {
+        bookmaker
+        navLink
+    }
+    runners {
+        __typename
+        id
+        number
+        name
+        trainerName
+        riderName
+        scratchedTime
+        betfairMarkets {
+        __typename
+        id
+        sp
+        marketName
+        totalMatched
+        marketTotalMatched
+        back {
+            price
+            size
+            lastUpdated
+        }
+        lay {
+            price
+            size
+            lastUpdated
+        }
+        }
+        bookmakerMarkets(bookmakers: $bookmakers, bookmakersWithFlucs: $bookmakersWithFlucs) {
+        __typename
+        id
+        bookmaker
+        fixedWin {
+            flucs {
+            price
+            lastUpdated
+            }
+            openingPrice
+            price
+            lastUpdated
+        }
+        fixedPlace {
+            flucs {
+            price
+            lastUpdated
+            }
+            openingPrice
+            price
+            lastUpdated
+        }
+        }
+    }
+}
+```
+
+### Query Multiple Races
+
+```graphql
+races(dateFrom: $dateFrom, dateTo: $dateTo, andDates: $andDates) {
+    id
+    meeting {
+        id
+        location
+        track
+        type
+        date
+    }
+    name
+    number
+    status
+    distance
+    startTime
+    runners {
+        id
+        name
+        number
+        trainerName
+        riderName
+    }
+}
+```
+
+For more information on the available query options, refer to the API reference below.
+
+## API Reference
+
+The Betwatch.com GraphQL API currently supports the following two queries:
+
+### `race(id: ID!): Race!`
+
+Retrieve a single race by its ID.
+
+### `races(andDates: [String!], dateFrom: String, dateTo: String, hasBookmakers: [String!], hasRiders: [String!], hasRunners: [String!], hasTrainers: [String!], limit: Int, locations: [String!], offset: Int, tracks: [String!], types: [RaceType!]): [Race!]!`
+
+Retrieve a list of races based on the provided filters.
+
+- `dateFrom` is the earliest date to include in the results. The date must be in the format `YYYY-MM-DD`.
+- `dateTo` is the latest date to include in the results. The date must be in the format `YYYY-MM-DD`.
+- `andDates` is a list of additional dates to include in the results. The dates must be in the format `YYYY-MM-DD`.
+- `hasBookmakers` is a list of bookmakers to include in the results.
+- `hasRiders` is a list of riders to include in the results.
+- `hasRunners` is a list of runners to include in the results.
+- `hasTrainers` is a list of trainers to include in the results. A subset of the name will still match.
+- `limit` is the maximum number of results to return. The default is 100.
+- `locations` is a list of locations/states to include in the results. These will match the TAB locations.
+- `offset` is the number of results to skip before returning the results. The default is 0.
+- `tracks` is a list of tracks to include in the results.
+- `types` is a list of race types to include in the results. Options are `Thoroughbred`, `Greyhound`, or `Harness`

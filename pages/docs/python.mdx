@@ -4,15 +4,137 @@ The Betwatch Python SDK is a Python library that allows you to interact with the
 
 ## Installation
 
-```bash
+To install the Betwatch Python SDK, you can use pip package manager. Run the following command in your terminal or command prompt:
+
+```bash copy
 pip install betwatch
 ```
 
+## Examples
+
+[Full examples (including async) are available in the GitHub repository](https://github.com/betwatch/betwatch-sdk-python/tree/main/examples)
+
 ## Usage
 
-```python copy
-from betwatch import connect
+The Betwatch SDK provides clients for both synchronous and asynchronous usage. The synchronous client is the default `BetwatchClient`, and the asynchronous client is available as `BetwatchAsyncClient`. The following examples use the synchronous client, but the asynchronous client provides all of the same functions that can be `await`ed.
 
-# Connect to the API
-client = betwatch.connect()
+All SDK is fully typed, meaning that you will get autocomplete and type hints in your code editor, making it easy to explore the SDK and find the right methods and attributes.
+
+### Getting Started
+
+Use the `connect` method to create a client instance. You can pass your API key as the first argument, or set the `BETWATCH_API_KEY` environment variable.
+
+```python copy
+import betwatch
+
+client = betwatch.connect() # the api key can also be passed as the first argument
+
+# or using the asyncio client
+async_client = betwatch.connect_async()
+```
+
+### Get Races and Prices
+
+The following examples use the concepts from the [documention section](#documentation) of this page.
+
+```python copy
+# be sure to import all relevant types
+from betwatch.types import (
+    Bookmaker,
+    MarketPriceType,
+    MeetingType,
+    RaceProjection,
+    RacesFilter,
+)
+
+# define the projection of the returned data
+# we can filter out for certain bookmakers as well as define whether we want market data or flucs
+projection = RaceProjection(
+    markets=True,
+    place_markets=False,
+    flucs=True,
+    links=False,
+    betfair=False,
+    bookmakers=[Bookmaker.SPORTSBET, Bookmaker.BLUEBET],
+)
+
+# define the filter for the query
+# here we can filter by date, type of meeting, and various other parameters
+races_filter = RacesFilter(
+    date_from=datetime.now() - timedelta(days=7),
+    date_to=datetime.now() + timedelta(days=2),
+    types=[MeetingType.THOROUGHBRED],  # filter on a race type
+    has_riders=["bowman", "mccoy"],  # filter on any race containing these riders
+)
+
+races = client.get_races(projection, races_filter)
+print(f"Found {len(races)} matching the query")
+for race in races:
+    print(race)
+    # make sure the race has runners
+    if race.runners:
+        # loop through each runner in the race
+        for runner in race.runners:
+            print(runner) # types have a __str__ method that prints the name of the runner
+
+            # make sure the runner has bookmaker markets
+            if not runner.bookmaker_markets:
+                print("No bookmaker markets for this runner")
+                continue
+
+            # loop through each market for the runner
+            for market in runner.bookmaker_markets:
+                print(market) # types have a __str__ method that prints the market details
+
+                # get the fixed win market price
+                if market.fixed_win:
+                    print(f"Fixed Win Price: {market.fixed_win.price}")
+
+                    # iterate through each fluc for the market
+                    if market.fixed_win.flucs:
+                        for fluc in market.fixed_win.flucs:
+                            print(fluc)
+
+```
+
+## Documentation
+
+### RaceProjection
+
+A `RaceProjection` can be used to specify which fields should be returned from a race request. Smaller responses mean faster responses, as a `Race` object can be quite large, especially with a lot of markets and fluctuations.
+
+```python copy
+from betwatch import RaceProjection, Bookmaker
+
+projection = RaceProjection(
+    markets=True, # return fixed win markets
+    place_markets=False, # don't return fixed place markets
+    flucs=True, # return flucs for each market
+    links=False, # don't return any race links (e.g. to the racecard)
+    betfair=False, # don't return betfair markets
+    bookmakers=[Bookmaker.SPORTSBET, Bookmaker.BLUEBET], # only return markets for these bookmakers
+)
+```
+
+### RacesFilter
+
+A `RacesFilter` must be used to define search criteria when searching for races using the SDK. If
+
+```python copy
+from betwatch import RacesFilter, MeetingType
+from datetime import datetime, timedelta
+
+races_filter = RacesFilter(
+    limit: int = 100, # limit the number of results returned, this number will be capped depending on your query
+    offset: int = 0, # offset the results by this number, used for pagination
+    types: Optional[List[Union[MeetingType, str]]] = [MeetingType.THOROUGHBRED], # filter on a race type
+    tracks: Optional[List[str]] = None, # filter on a track
+    locations: Optional[List[str]] = None, # filter on a location
+    has_bookmakers: Optional[List[Bookmaker]] = None, # filter only if the race has markets from these bookmakers
+    has_runners: Optional[List[str]] = None, # filter if it has specific runners
+    has_trainers: Optional[List[str]] = None, # filter if it has specific trainers
+    has_riders: Optional[List[str]] = ["bowman", "mccoy"], # filter on any race containing these riders
+    date_from: Optional[datetime] = datetime.now() - timedelta(days=7), # filter on a date range, defaults to today only
+    date_to: Optional[datetime] = datetime.now() + timedelta(days=2),
+)
 ```
