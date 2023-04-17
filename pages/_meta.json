@@ -1,15 +1,19 @@
 {
-  "index": "Introduction",
-  "another": "Another Page",
-  "advanced": "Advanced (A Folder)",
-  "about": {
-    "title": "About",
-    "type": "page"
-  },
-  "contact": {
-    "title": "Contact ↗",
-    "type": "page",
-    "href": "https://twitter.com/shuding_",
-    "newWindow": true
-  }
+    "index": "Introduction",
+    "basics": "Basics",
+    "layouts": "Custom Layouts",
+    "alerts": "Alerts",
+    "filtering": "Filtering",
+    "issues": "Common Issues",
+    "docs": "API",
+    "about": {
+        "title": "About",
+        "type": "page"
+    },
+    "contact": {
+        "title": "Contact ↗",
+        "type": "page",
+        "href": "mailto:support@betwatch.com",
+        "newWindow": true
+    }
 }
