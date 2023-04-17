@@ -19,6 +19,7 @@ const config: DocsThemeConfig = {
             (defaultLocale === locale ? asPath : `/${locale}${asPath}`)
 
         return <>
+            <meta property="description" content={frontMatter.description || 'Guides and tutorials for the Betwatch odds comparison platform'} />
             <meta property="og:url" content={url} />
             <meta property="og:title" content={frontMatter.title + ' - Betwatch Guide' || 'Betwatch Guide'} />
             <meta property="og:description" content={frontMatter.description || 'Guides and tutorials for the Betwatch odds comparison platform'} />
