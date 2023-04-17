@@ -1,0 +1,123 @@
+# Betwatch 101
+
+The Betwatch platform is designed to be simple and easy to use. There are a couple of tips and tricks that may not be obvious at first glance, so we have put together this guide to help you get the most out of the platform.
+
+## Race View
+
+### Free Version
+
+Betwatch provides both a free version and a paid subscription. The free version has a number of limitations that are not present in the paid version.
+
+- Only the top prices will be displayed for each runner. All other prices will be grayed out.
+- Prices will be delayed, and will not be updated in real time. This means you will need to constantly refresh the page to update the prices.
+- You will not be able to set price alerts.
+- Betfair volumes will not be displayed.
+- You may not see historical prices for a runner.
+- You cannot view historical races.
+- You cannot create custom columns or layouts.
+
+![Free](/free-1.png)
+
+### Columns
+
+#### Betfair
+
+##### Back and Lay Prices
+
+Betfair has the concept of a `Back` price and a `Lay` price. The `Back` price is the price that you can bet on a runner to win, and the `Lay` price is the price that you can bet on a runner to lose.
+You can think of this as similar to the stock market - you can buy a stock at a certain price, or you can sell a stock at a certain price.
+
+Additionally, Betfair has the concept of a `Back` and `Lay` volume. This is the amount of money that has been bet on a runner at a given price. The higher the volume, the more confident the market is in that price.
+
+Betfair also provides _market depth_ - which means that you see the top 3 Back and Lay prices, along with their volumes. This is useful for seeing how the market is shaping up, as well as seeing if there are any big bets in the market at a price that may not be the top price.
+
+Betwatch provides a number of Betfair columns, with different column indicators:
+
+- **WB[0-2]** - Win Back Price at a given depth
+- **WL[0-2]** - Win Lay Price at a given depth
+- **PB[0-2]** - Place Back Volume at a given depth
+- **PL[0-2]** - Place Lay Volume at a given depth
+- **WBWA** - Win Back Price Weighted Average (the weighted price of the top 3 Back prices)
+- **WLWA** - Win Lay Price Weighted Average (the weighted price of the top 3 Lay prices)
+- **PBWA** - Place Back Volume Weighted Average (the weighted price of the top 3 Back volumes)
+- **PLWA** - Place Lay Volume Weighted Average (the weighted price of the top 3 Lay volumes)
+
+![Betfair Back and Lay](/betfair-1.png)
+
+##### Betfair Starting Price (BSP)
+
+One of the important benchmarks in racing betting markets is the Betfair Starting Price (BSP). This is the price that Betfair calculates as the true market price of a runner, based on the market. Once a market has jumped and a BSP has been calculated, it is a good indication of the true market price of a runner.
+
+![BSP](/bsp.png)
+
+#### Bookmakers
+
+There are various bookmaker column types available - you can select which ones you want to display in the `Columns` dropdown.
+
+- **FW** - Fixed Win Price
+- **FW Flucs** - Fixed Win Price Fluctuation Graph
+- **FP** - Fixed Place Price
+- **FP Flucs** - Fixed Place Price Fluctuation Graph
+
+![Bookmaker Columns](/bookmaker-columns.png)
+
+##### Click Through to Bookmaker
+
+One of the most important features of Betwatch is the ability to click through to the bookmaker's website to place a bet. This is available for all bookmakers that have a fixed price column.
+
+Clicking on any bookmaker column will take you directly to the bookmaker's race page.
+
+![Click Through](/click-through.gif)
+
+### Text Columns / Custom Columns
+
+You can create custom columns to display any text you want. This is useful for displaying notes, ratings, observations, or any other information you want to keep track of. This information is synced across all of your devices, so you can access it from anywhere.
+
+![Notes](/notes.png)
+
+### Sorting
+
+You can click on any runner to sort all bookmakers by that runner's price. If you have any columns that are locked - they will not be affected and will remain in their original position.
+
+![Sorting](/sorting.gif)
+
+### Filtering
+
+You may filter races in the sidebar in various ways:
+
+- **Search Box** - this will conduct a search of all race tracks, runner names, and trainer/jockey names
+- **Date** - you may filter by a specific date in the past or future
+- **Meeting** - you may filter by a specific track
+- **Type** - you may filter by a given race type (Thoroughbred, Harness, Greyhound)
+
+![Filtering](/filtering-1.png)
+
+#### Manual Race Filtering
+
+You can also specify specific races that you wish to observe. This is useful if you have a list of races that you are betting on.
+
+![Manual Filter](/manual-filter.gif)
+
+### Price Fluctuations
+
+If you hover over a price, you will see a graph of the price fluctuations (history) for that runner, along with a chart.
+
+![Flucs](/flucs-1.png)
+
+### Alerts
+
+There are two kinds of alerts you can set on Betwatch:
+
+#### Race Alerts
+
+To set a race alert, click on the bell icon in the top left of the race overview.
+You may set alerts for different times to jump.
+
+The `New Markets` alert will send you an alert whenever the market is first listed on Betwatch, which is generally not too long after the fields are finalised.
+
+![Race Alerts](/race-alerts-1.png)
+
+#### Price Alerts
+
+You may set custom alerts that will fire on specific price thresholds or movements.
+See the [Alerts](/alerts) page for all the details on how to set price alerts.

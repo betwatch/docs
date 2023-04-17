@@ -11,7 +11,7 @@ const config: DocsThemeConfig = {
     },
     docsRepositoryBase: 'https://github.com/betwatch/docs',
     footer: {
-        text: 'Betwatch Pty Ltd',
+        text: '2023 © Betwatch Pty Ltd',
     },
 }
 

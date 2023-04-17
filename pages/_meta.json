@@ -3,14 +3,7 @@
     "basics": "Basics",
     "layouts": "Custom Layouts",
     "alerts": "Alerts",
-    "filtering": "Filtering",
-    "mobile": "Betwatch on Mobile",
-    "issues": "Common Issues",
     "docs": "API",
-    "about": {
-        "title": "About",
-        "type": "page"
-    },
     "contact": {
         "title": "Contact ↗",
         "type": "page",
