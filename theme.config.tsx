@@ -8,6 +8,13 @@ const config: DocsThemeConfig = {
         return {
             titleTemplate: '%s – Betwatch Guide',
             description: 'Guides and tutorials for the Betwatch odds comparison platform',
+            twitter: {
+                handle: '@BetwatchHQ',
+                site: '@BetwatchHQ',
+                cardType: 'summary_large_image',
+                description: 'Guides and tutorials for the Betwatch odds comparison platform',
+                image: '/og-image.png',
+            }
         }
     },
     logo: <Logo />,
