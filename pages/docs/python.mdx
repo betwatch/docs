@@ -22,7 +22,7 @@ pip install betwatch
 
 The Betwatch SDK provides clients for both synchronous and asynchronous usage. The synchronous client is the default `BetwatchClient`, and the asynchronous client is available as `BetwatchAsyncClient`. The following examples use the synchronous client, but the asynchronous client provides all of the same functions that can be `await`ed.
 
-All SDK is fully typed, meaning that you will get autocomplete and type hints in your code editor, making it easy to explore the SDK and find the right methods and attributes.
+All SDK objects and functions are fully typed, meaning that you will get autocomplete and type hints in your code editor, making it easy to explore the SDK and find the right methods and attributes.
 
 ### Getting Started
 
@@ -122,10 +122,10 @@ projection = RaceProjection(
 
 ### RacesFilter
 
-A `RacesFilter` must be used to define search criteria when searching for races using the SDK. If
+A `RacesFilter` must be used to define search criteria when searching for races using the SDK. If it is not supplied, it will default to no filter.
 
 ```python copy
-from betwatch import RacesFilter, MeetingType
+from betwatch.types import RacesFilter, MeetingType
 from datetime import datetime, timedelta
 
 races_filter = RacesFilter(
