@@ -12,6 +12,11 @@ GraphQL is a query language for your API, and a runtime for executing those quer
 
 To make queries to the Betwatch.com GraphQL API, use the endpoint `api.betwatch.com/query`. There is also a [playground](https://api.betwatch.com/playground) endpoint you can use for exploring the API and testing your queries. Note that authentication is required; you must pass your API key as the `X-API-KEY` header in your requests.
 
+```http request
+POST https://api.betwatch.com/query
+X-API-KEY: <your-api-key>
+```
+
 If you would like access to the API, it requires a separate subscription fee. Please email [support@betwatch.com](mailto:support@betwatch.com) to request access.
 
 ## Example Queries
@@ -20,14 +25,12 @@ If you would like access to the API, it requires a separate subscription fee. Pl
 
 ```graphql copy
 race(id: $id) {
-    __typename
     id
     betfairMapping {
         win
         place
     }
     meeting {
-        __typename
         id
         track
         location
@@ -45,7 +48,6 @@ race(id: $id) {
         navLink
     }
     runners {
-        __typename
         id
         number
         name
@@ -53,45 +55,43 @@ race(id: $id) {
         riderName
         scratchedTime
         betfairMarkets {
-        __typename
-        id
-        sp
-        marketName
-        totalMatched
-        marketTotalMatched
-        back {
-            price
-            size
-            lastUpdated
-        }
-        lay {
-            price
-            size
-            lastUpdated
-        }
+            id
+            sp
+            marketName
+            totalMatched
+            marketTotalMatched
+            back {
+                price
+                size
+                lastUpdated
+            }
+            lay {
+                price
+                size
+                lastUpdated
+            }
         }
         bookmakerMarkets(bookmakers: $bookmakers, bookmakersWithFlucs: $bookmakersWithFlucs) {
-        __typename
-        id
-        bookmaker
-        fixedWin {
-            flucs {
-            price
-            lastUpdated
+            id
+            bookmaker
+            fixedWin {
+                flucs {
+                    price
+                    lastUpdated
+                }
+                openingPrice
+                price
+                lastUpdated
             }
-            openingPrice
-            price
-            lastUpdated
-        }
-        fixedPlace {
-            flucs {
-            price
-            lastUpdated
+            fixedPlace {
+                flucs {
+                    price
+                    lastUpdated
+                }
+                openingPrice
+                price
+                lastUpdated
             }
-            openingPrice
-            price
-            lastUpdated
-        }
         }
     }
 }
@@ -125,6 +125,94 @@ races(dateFrom: $dateFrom, dateTo: $dateTo, andDates: $andDates) {
 ```
 
 For more information on the available query options, refer to the API reference below.
+
+### Full Example (cURL)
+
+```bash copy
+curl -X POST -H "Content-Type: application/json" -H "X-API-KEY: <your-api-key>" -d '{
+  "query": "query ($dateFrom: String, $dateTo: String, $andDates: Boolean) {
+    races(dateFrom: $dateFrom, dateTo: $dateTo, andDates: $andDates) {
+      id
+      meeting {
+        id
+        location
+        track
+        type
+        date
+      }
+      name
+      number
+      status
+      distance
+      startTime
+      runners {
+        id
+        name
+        number
+        trainerName
+        riderName
+      }
+    }
+  }",
+  "variables": {
+    "dateFrom": "2023-05-01",
+    "dateTo": "2023-05-31",
+    "andDates": ["2023-02-02"]
+  }
+}' https://api.betwatch.com/query
+```
+
+### Full Example (Python Requests)
+Although it is recommended to use the [Python SDK](/docs/python), you can also use the [Requests](https://docs.python-requests.org/en/master/) (or any other) library to make requests to the API.
+```python copy
+import requests
+import json
+
+url = "https://api.betwatch.com/query"
+headers = {
+    "Content-Type": "application/json",
+    "X-API-KEY": "<your-api-key>"
+}
+data = {
+    "query": """
+        query ($dateFrom: String, $dateTo: String, $andDates: Boolean) {
+            races(dateFrom: $dateFrom, dateTo: $dateTo, andDates: $andDates) {
+                id
+                meeting {
+                    id
+                    location
+                    track
+                    type
+                    date
+                }
+                name
+                number
+                status
+                distance
+                startTime
+                runners {
+                    id
+                    name
+                    number
+                    trainerName
+                    riderName
+                }
+            }
+        }
+    """,
+    "variables": {
+        "dateFrom": "2023-05-01",
+        "dateTo": "2023-05-31",
+        "andDates": ["2023-02-02"]
+    }
+}
+
+response = requests.post(url, headers=headers, data=json.dumps(data))
+
+# Access the response content
+print(response.json())
+```
+
 
 ## API Reference
 
