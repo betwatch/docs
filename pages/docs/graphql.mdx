@@ -215,6 +215,29 @@ response = requests.post(url, headers=headers, data=json.dumps(data))
 print(response.json())
 ```
 
+### Websocket subscription
+If you have access to the live websocket API, you may create a durable connection that will stream price updates to you as they occur. This is useful for applications that require real-time updates.
+The [Python SDK Subscriptions Example](https://github.com/betwatch/betwatch-sdk-python/blob/main/examples/subscriptions.py) shows an example of implementing this using the SDK. In order to subscribe to all price updates - you may pass an empty race id.
+
+If connecting directly - you may use the following GraphQL query to subscribe to all price updates at the endpoint `wss://api.betwatch.com/sub`:
+```graphql copy
+subscription PriceUpdates($id: ID!, $bookmakers: [String!]) {
+    priceUpdates(id: $id, bookmakers: $bookmakers) {
+        id
+        bookmaker
+        fixedPlace {
+            price
+            lastUpdated
+        }
+        fixedWin {
+            price
+            lastUpdated
+        }
+    }
+}
+```
+
+For more information on how to get access to the live websocket API, please contact us at [support@betwatch.com](mailto:support@betwatch.com).
 
 ## API Reference
 
@@ -240,3 +263,4 @@ Retrieve a list of races based on the provided filters.
 - `offset` is the number of results to skip before returning the results. The default is 0.
 - `tracks` is a list of tracks to include in the results.
 - `types` is a list of race types to include in the results. Options are `Thoroughbred`, `Greyhound`, or `Harness`
+
