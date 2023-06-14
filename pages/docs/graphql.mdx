@@ -237,6 +237,18 @@ subscription PriceUpdates($id: ID!, $bookmakers: [String!]) {
 }
 ```
 
+You will need to initially send the API key in the `connection_init` message as follows:
+```json
+{
+    "type": "connection_init",
+    "payload": {
+        "token": "<your-api-key>"
+    }
+}
+```
+
+Most GraphQL libraries will provide helper methods to pass this payload, such as [graphql-ws for Javascript](https://the-guild.dev/graphql/ws/docs/interfaces/client.ClientOptions#connectionparams) and [gql for Python](https://gql.readthedocs.io/en/stable/transports/websockets.html#websockets-authentication). The Betwatch Python SDK handles this automatically.
+
 For more information on how to get access to the live websocket API, please contact us at [support@betwatch.com](mailto:support@betwatch.com).
 
 ## API Reference
