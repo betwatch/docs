@@ -1,13 +1,14 @@
 {
-    "index": "Introduction",
-    "basics": "Basics",
-    "layouts": "Custom Layouts",
-    "alerts": "Alerts",
-    "docs": "API",
-    "contact": {
-        "title": "Contact ↗",
-        "type": "page",
-        "href": "mailto:support@betwatch.com",
-        "newWindow": true
-    }
+  "index": "Introduction",
+  "basics": "Basics",
+  "layouts": "Custom Layouts",
+  "betting": "Betting",
+  "alerts": "Alerts",
+  "docs": "API",
+  "contact": {
+    "title": "Contact ↗",
+    "type": "page",
+    "href": "mailto:support@betwatch.com",
+    "newWindow": true
+  }
 }
